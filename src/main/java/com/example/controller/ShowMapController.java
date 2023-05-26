@@ -27,14 +27,16 @@ public String getIndex(Model model) {
 model.addAttribute("id",1);
 return "map";}
 
+
 /**
- * idを受け取る画面表示
- * @param model
- * @param id　駅id or 地区id
- * @return map表示画面
+ * map表示のメソッド
+ * @param model　モデル
+ * @param id　それぞれのid
+ * @param infomationType　そのidが何のidなのか
+ * @return
  */
 @PostMapping("/")
-public String postIndex(Model model,Integer id) {
+public String postIndex(Model model,Integer id,String infomationType) {
 model.addAttribute("id",id);
 return "map";
 }
