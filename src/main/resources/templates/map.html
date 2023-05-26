@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>家を建てる際の情報サイト</title>
+
+<link rel="stylesheet" th:href="@{/css/map.css}" />
+<style>
+
+</style>
+</head>
+
+<body>
+<header>
+ <div class="header-right">
+  <a href="/">ホーム</a>
+  <a href="/about">サイトについて</a>
+  <a href="/contact">お問い合わせ</a>
+ </div>
+ 
+<h1>家を建てる際の情報サイト</h1>
+<div>ここに受け取ったidを受け取ります : <span th:text="${id}"></span></div>
+</header>
+
+<body>
+<section>
+  <h2>物件一覧</h2>
+  <ul>
+    <li>
+      <h3>○○○○の家</h3>
+      <img src="image.jpg" alt="物件画像">
+      <p>3LDK | 100m² | ¥3,000万</p>
+      <a href="/property/1">詳細を見る</a>
+      <button type="button">お気に入りに追加</button>
+    </li>
+    <li>
+      <h3>△△△△マンション</h3>
+      <img src="image.jpg" alt="物件画像">
+      <p>2LDK | 70m² | ¥2,500万</p>
+      <a href="/property/2">詳細を見る</a>
+      <button type="button">お気に入りに追加</button>
+    </li>
+    <li>
+      <h3>××××ハイツ</h3>
+      <img src="image.jpg" alt="物件画像">
+      <p>1LDK | 50m² | ¥1,500万</p>
+      <a href="/property/3">詳細を見る</a>
+      <button type="button">お気に入りに追加</button>
+    </li>
+    <!-- 物件リストを追加する場合はここに追記 -->
+  </ul>
+    <h2>地図</h2>
+  <div id="map"></div>
+
+  <nav>
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">次へ</a>
+  </nav>
+</section>
+</body>
+
+<footer>
+<nav>
+  <a href="/">ホーム</a>
+  <a href="/about">サイトについて</a>
+  <a href="/contact">お問い合わせ</a>
+</nav>
+<p>&copy; 2023 家を建てる際の情報サイト</p>
+</footer>
+<script src="/js/map.js"></script>
+<script src="/js/googlemap.js"></script>
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyAG2tgnkXGl888HTaCPW8Bo9VPr8ytP8yc&language=ja"></script>
+<script>
+var MyLatLng = new google.maps.LatLng(35.6811673, 139.7670516);
+var Options = {
+ zoom: 15,      //地図の縮尺値
+ center: MyLatLng,    //地図の中心座標
+ mapTypeId: 'roadmap'   //地図の種類
+};
+var map = new google.maps.Map(document.getElementById('map'), Options);
+</script>
+<link rel="stylesheet" th:href="@{/css/map.css}" />
+</html>
