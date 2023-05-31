@@ -32,12 +32,12 @@ new Vue({
 		selectAddress: "近隣から再検索▼",
 		id:"",
 	},
-	
-	methods: {
-		created(){
+	created(){
 			getPlaceData();
 			getAddressList();
 		},
+	methods: {
+		
 		toggleDropdown() {
 			this.showDropdown = !this.showDropdown;
 		},
@@ -100,12 +100,12 @@ new Vue({
 		selectStation: "駅から再検索▼",
 		id:"",
 	},
-	
-	methods: {
-		created(){
+	created(){
 			getStationData();
 			getStationList();
 		},
+	methods: {
+		
 		toggleDropdown() {
 			this.showDropdown = !this.showDropdown;
 		},
