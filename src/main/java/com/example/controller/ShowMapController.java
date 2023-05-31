@@ -38,6 +38,7 @@ return "map";}
 @PostMapping("/")
 public String postIndex(Model model,Integer id,String infomationType) {
 model.addAttribute("id",id);
+model.addAttribute("infomationType",infomationType);
 return "map";
 }
 }
