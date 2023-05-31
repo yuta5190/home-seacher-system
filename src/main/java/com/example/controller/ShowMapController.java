@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * map表示がめん.
  * 
  * @author yoshida_yuuta
- *
  */
 @RequestMapping("/map")
 @Controller
