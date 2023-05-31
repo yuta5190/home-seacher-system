@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+.v--enter-active,
+.v-leave-active {
+  transition: opacity 1s;
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+#pin-search label{
+text-align: center;
+letter-spacing: 5px;
+font-size:25px;
+}
+
+#pin-search input {
+  position: absolute;
+  left: -9999px; 
+  
+}
+
+#pin-search label {
+  display: block;
+  position: relative;
+  margin: 20px;
+  padding: 15px 30px 15px 62px;
+  border: 3px solid #6a8494;
+  border-radius: 100px;
+  color: #6a8494;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color .2s, box-shadow .2s;
+  width: 300px;
+  transform: translateX(100px);
+}
+
+/* 円 */
+#pin-search label::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  width: 32px;
+  border: 3px solid #6a8494;
+  border-radius: 100px;
+  transition: background-color .2s;
+}
+
+#pin-search label:hover,
+input:focus + label {
+  box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+}
+
+#pin-search input:checked + label {
+  background-color: #6a8494;
+  color: white;
+  	border: 3px solid #fff;;
+  border-radius: 100px;
+}
+
+#pin-search input:checked + label::before {
+  background-color: #6a8494;
+  border: 3px solid #fff;
+  	border: 3px solid #fff;;
+  border-radius: 100px;
+}
