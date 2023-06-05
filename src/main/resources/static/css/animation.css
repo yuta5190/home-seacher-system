@@ -10,6 +10,10 @@
   opacity: 0;
 }
 
+[v-cloak]{
+	display:none;
+}
+
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans);
 #pin-search label{
 text-align: center;
@@ -26,7 +30,7 @@ font-size:25px;
 #pin-search label {
   display: block;
   position: relative;
-  margin: 20px;
+  margin: 5% 0 5% 25%;
   padding: 15px 30px 15px 62px;
   border: 3px solid #6a8494;
   border-radius: 100px;

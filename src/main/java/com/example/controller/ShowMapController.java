@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * map表示がめん.
+ * map表示画面.
  * 
  * @author yoshida_yuuta
  */
