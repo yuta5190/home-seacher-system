@@ -13,7 +13,10 @@
 	<select
 		id="railway-lines"
 		name="railwayLines">
-		<option value=""> - 沿線を選択してください -</option>
+		<option
+			th:each="railwayLine : ${railwayLineList}"
+			th:value="${railwayLine.id}"
+			th:text="${railwayLine.lineName}"> - 沿線を選択してください -</option>
 	</select><br>
 	駅情報<br>
 	<select
