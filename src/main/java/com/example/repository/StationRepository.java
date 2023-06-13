@@ -12,6 +12,12 @@ import org.springframework.stereotype.Repository;
 
 import com.example.domain.Station;
 
+/**
+ * stationsテーブルを操作するリポジトリ.
+ * 
+ * @author yoshimatsushouta
+ *
+ */
 @Repository
 public class StationRepository {
 

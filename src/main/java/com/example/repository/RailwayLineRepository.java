@@ -10,6 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import com.example.domain.RailwayLine;
 
+/**
+ * railway_linesテーブルを操作するリポジトリ.
+ * 
+ * @author yoshimatsushouta
+ *
+ */
 @Repository
 public class RailwayLineRepository {
 
