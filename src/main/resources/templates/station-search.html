@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form
+	th:action="@{/stationSearch}"
+	method="post"
+>
+	沿線情報<br>
+	<select
+		id="railway-lines"
+		name="railwayLines">
+		<option value=""> - 沿線を選択してください -</option>
+	</select><br>
+	駅情報<br>
+	<select
+		id="stations"
+		name="stations">
+		<option value=""> - 駅を選択してください -</option>
+	</select><br>
+	<button type="submit">Submit</button>	
+</form>
+</body>
+</html>
