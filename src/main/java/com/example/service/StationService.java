@@ -36,7 +36,7 @@ public class StationService {
 	 * @param lineId 沿線ID
 	 * @return 駅一覧情報リスト
 	 */
-	public List<Station> findByLineId(int lineId) {
+	public List<Station> findByLineId(Integer lineId) {
 		List<Station> stationList = stationRepoitory.findByLineId(lineId);
 		return stationList;
 	}

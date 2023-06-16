@@ -15,9 +15,9 @@ import lombok.ToString;
 @ToString
 public class RailwayLine {
 	/** 沿線ID */
-	private int id;
+	private Integer id;
 	/** 鉄道会社ID */
-	private int companyId;
+	private Integer companyId;
 	/** 沿線名 */
 	private String lineName;
 	/** エンセンメイ */
@@ -25,7 +25,7 @@ public class RailwayLine {
 	/** 沿線名別名 */
 	private String lineNameH;
 	/** 経度 */
-	private double longitude;
+	private Double longitude;
 	/** 緯度 */
-	private double latitude;
+	private Double latitude;
 }

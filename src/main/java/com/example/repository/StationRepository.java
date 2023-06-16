@@ -52,7 +52,7 @@ public class StationRepository {
 	 * @param lineId 沿線ID
 	 * @return 駅情報のリスト
 	 */
-	public List<Station> findByLineId(int lineId) {
+	public List<Station> findByLineId(Integer lineId) {
 		SqlParameterSource param = new MapSqlParameterSource().addValue("lineId", lineId);
 
 		StringBuilder sql = new StringBuilder();
