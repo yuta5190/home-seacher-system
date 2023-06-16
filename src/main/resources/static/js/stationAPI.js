@@ -2,8 +2,12 @@
 // 選択した沿線のidを取得
 var selectRailwayLine = document.getElementById("railway-lines");
 var selectStations = document.getElementById("stations");
+const button = document.getElementById("button");
 
-
+// ページ読み込みのタイミングで行う処理
+$(function () {
+	button.disabled = true
+});
 
 // 沿線を選択するたびに行う処理
 selectRailwayLine.addEventListener("change", function() {
@@ -40,5 +44,7 @@ function station_search() {
 		railwayLine,
 		true
 	);
+	
 	xhrStation.send();
+	button.disabled = false
 }
