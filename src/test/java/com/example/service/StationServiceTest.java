@@ -58,4 +58,19 @@ class StationServiceTest {
 		// 内容の確認
 		assertEquals(stationList, testList, "stationを正しく取得できていません");
 	}
+
+	@Test
+	void 駅ID検索をした駅情報表示のテスト() {
+		// DBにあるものを仮で定義
+		Station station = new Station();
+		final int testStationId = 0;
+		// stationRepositoryの動作を制御
+		Mockito.doReturn(station).when(stationRepository).load(testStationId);
+
+		// loadの呼び出し
+		Station testStation = stationService.load(0);
+
+		// 内容の確認
+		assertEquals(station, testStation, "stationを正しく取得できていません");
+	}
 }
