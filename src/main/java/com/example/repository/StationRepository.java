@@ -67,4 +67,26 @@ public class StationRepository {
 		List<Station> stationList = template.query(sql.toString(), param, STATION_ROW_MAPPER);
 		return stationList;
 	}
+
+	/**
+	 * 主IDから駅情報を呼び出す.
+	 * 
+	 * @param stationId 駅ID
+	 * @return 駅情報を返します 返せるものがなければnullを返します
+	 */
+	public Station load(Integer stationId) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT");
+		sql.append(" id, station_name, line_id, post, address, longitude, latitude");
+		sql.append(" FROM");
+		sql.append(" stations");
+		sql.append(" WHERE");
+		sql.append(" id = :stationId");
+		SqlParameterSource param = new MapSqlParameterSource().addValue("stationId", stationId);
+		List<Station> getStation = template.query(sql.toString(), param, STATION_ROW_MAPPER);
+		if (getStation.size() == 0) {
+			return null;
+		}
+		return getStation.get(0);
+	}
 }

@@ -40,4 +40,15 @@ public class StationService {
 		List<Station> stationList = stationRepoitory.findByLineId(lineId);
 		return stationList;
 	}
+
+	/**
+	 * 主IDから駅情報を取得します.
+	 * 
+	 * @param lineId 駅ID
+	 * @return 駅情報
+	 */
+	public Station load(Integer stationId) {
+		Station station = stationRepoitory.load(stationId);
+		return station;
+	}
 }

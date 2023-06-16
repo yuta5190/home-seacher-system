@@ -66,4 +66,21 @@ class StationRepositoryTest {
 
 		System.out.println("ー沿線ID検索テスト終了ー");
 	}
+
+	@Test
+	void 駅ID検索テスト() {
+		System.out.println("ー駅ID検索テスト開始ー");
+		final int testStationId = 1130801;
+		Station testStation = stationRepository.load(testStationId);
+
+		assertEquals(1130801, testStation.getId(), "一列目のIDが一致していません");
+		assertEquals("東京", testStation.getStationName(), "一列目のIDが一致していません");
+		assertEquals(11308, testStation.getLineId(), "一列目のIDが一致していません");
+		assertEquals("100-0005", testStation.getPost(), "一列目のIDが一致していません");
+		assertEquals("東京都千代田区丸の内一丁目", testStation.getAddress(), "一列目のIDが一致していません");
+		assertEquals(139.766103, testStation.getLongitude(), "一列目のIDが一致していません");
+		assertEquals(35.681391, testStation.getLatitude(), "一列目のIDが一致していません");
+
+		System.out.println("ー駅ID検索テスト終了ー");
+	}
 }
