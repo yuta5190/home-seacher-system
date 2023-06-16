@@ -135,8 +135,8 @@
 <link rel="stylesheet" th:href="@{/css/tab.css}" />
 
 <!-- 以下コントローラーから情報を取得-->
-<input type="hidden" id="longitudeInput" value="${longitude}">
-<input type="hidden" id="latitudeInput" value="${latitude}"> 
+<input type="hidden" id="longitudeInput" th:value="${mapInfo.longitude}">
+<input type="hidden" id="latitudeInput" th:value="${mapInfo.latitude}"> 
 <!--  以上コントローラーから情報を取得-->
 
 </html>
