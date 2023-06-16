@@ -1,6 +1,8 @@
 package com.example.domain;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * stationsテーブルの情報を保持するクラス.
@@ -8,7 +10,9 @@ import lombok.Data;
  * @author yoshimatsushouta
  *
  */
-@Data
+@Getter
+@Setter
+@ToString
 public class Station {
 	/** 駅ID */
 	private Integer id;
@@ -24,4 +28,5 @@ public class Station {
 	private Double longitude;
 	/** 緯度 */
 	private Double latitude;
+
 }

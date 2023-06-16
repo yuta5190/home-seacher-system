@@ -1,6 +1,8 @@
 package com.example.domain;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * railway_linesテーブルの情報を保持するドメイン.
@@ -8,12 +10,14 @@ import lombok.Data;
  * @author yoshimatsushouta
  *
  */
-@Data
+@Getter
+@Setter
+@ToString
 public class RailwayLine {
 	/** 沿線ID */
 	private Integer id;
 	/** 鉄道会社ID */
-	private String companyId;
+	private Integer companyId;
 	/** 沿線名 */
 	private String lineName;
 	/** エンセンメイ */
