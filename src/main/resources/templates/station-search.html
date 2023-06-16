@@ -6,7 +6,7 @@
 </head>
 <body>
 <form
-	th:action="@{/stationSearch}"
+	th:action="@{/map/}"
 	method="post"
 >
 	沿線情報<br>
@@ -21,13 +21,14 @@
 	駅情報<br>
 	<select
 		id="stations"
-		name="stations">
+		name="id">
 		<option value=""> - 上記の沿線を選択してください -</option>
 		<option
 			th:each="station : ${stationList}"
 			th:value="${station.id}"
 			th:text="${station.lineName}"> - 沿線が表示されます -</option>
 	</select><br>
+	<input type="hidden" value="station" name="infomationType">
 	<button type="submit">Submit</button>	
 </form>
 <script th:src="@{/js/stationAPI.js}"></script>
