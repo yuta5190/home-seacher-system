@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <title>地域から検索</title>
+  </head>
+  <body>
+    <header
+      class="flex justify-center items-center bg-gray-500 bg-opacity-50 text-white text-xl"
+    >
+      <div class="py-2">地域から検索</div>
+    </header>
+    <main class="bg-white">
+      <form
+        th:action="@{/search-by-address/search}"
+        th:object="${searchByAddressForm}"
+        method="post"
+      >
+        <!-- 市区町村選択 -->
+        <div class="mx-5 bg-white border-gray-400 border-4 mt-4 px-2 py-4">
+          <div
+            class="municipality-message text-red-600"
+            th:errors="*{municipalityId}"
+          ></div>
+          <div class="flex items-center">
+            <div class="mr-2">市区町村を選択</div>
+            <div
+              class="mr-5 text-2xl"
+              id="selected-municipality-name"
+              th:text="*{municipalityName} ? *{municipalityName}"
+            >
+              市区町村名
+            </div>
+            <input
+              type="hidden"
+              name="municipalityName"
+              th:field="*{municipalityName}"
+              id="municipality-name"
+            />
+            <button
+              type="button"
+              class="bg-gray-400 hover:bg-gray-600 rounded-md text-white text-xs py-1 px-2"
+              th:classappend="!*{municipalityId} ? 'hidden'"
+              id="change-municipality"
+            >
+              変更
+            </button>
+          </div>
+          <div
+            class="select-municipality"
+            th:classappend="*{municipalityId} ? 'hidden'"
+          >
+            <div class="municipalities mt-3 flex flex-wrap">
+              <div th:each="municipality : ${municipalityList}">
+                <input
+                  class="hidden"
+                  type="radio"
+                  name="municipalityId"
+                  th:id="${'m' + municipality.id}"
+                  th:value="${municipality.id}"
+                  th:field="*{municipalityId}"
+                />
+                <label th:for="${'m' + municipality.id}">
+                  <div
+                    class="municipality rounded-md py-1 px-2 m-1 text-white cursor-pointer"
+                    th:classappend="${municipality.id} == *{municipalityId} ? 'bg-gray-800' : 'bg-gray-500 hover:bg-gray-600'"
+                    th:text="${municipality.name}"
+                  >
+                    市区町村名
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="flex justify-center pt-8">
+              <button
+                type="button"
+                class="bg-gray-400 hover:bg-gray-600 rounded-md text-white text-2xl py-1 px-2"
+                id="select-municipality-btn"
+              >
+                決定
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- ここまで市区町村選択 -->
+        <!-- 町域選択 -->
+        <div
+          class="select-address mx-5 bg-white border-gray-400 border-4 mt-4 px-2 py-4"
+          th:classappend="*{municipalityId} ? 'flex' : 'hidden'"
+        >
+          <div class="select-town w-1/2 p-2">
+            <div class="town-message text-red-600" th:errors="*{townId}"></div>
+            <div class="flex items-center h-6 mt-2">
+              <div class="mr-2">町域を選択</div>
+              <div
+                class="mr-2 text-2xl"
+                id="selected-town-name"
+                th:text="*{townName} ? *{townName}"
+              >
+                町域名(丁目を除く)
+              </div>
+              <input
+                type="hidden"
+                name="townName"
+                id="town-name"
+                th:field="*{townName}"
+              />
+            </div>
+            <div
+              class="towns mt-3 flex-col border-2 border-gray-700 max-h-60 overflow-auto"
+            >
+              <div class="town" th:each="town,status : ${townList}">
+                <input
+                  class="hidden"
+                  type="radio"
+                  name="townId"
+                  th:id="'t' + ${town.id}"
+                  th:value="${town.id}"
+                  th:field="*{townId}"
+                />
+                <label th:for="'t' + ${town.id}">
+                  <div
+                    class="town-selector pl-2 py-1 cursor-pointer"
+                    th:classappend="|${town.id == searchByAddressForm.townId ? 'bg-gray-500 text-white' : 'bg-gray-200 hover:bg-gray-300'} ${!status.last ? 'border-b-2 border-gray-500' : ''}|"
+                    th:text="${town.name}"
+                  >
+                    町域名(丁目除く)
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="select-choume w-1/2 p-2 hidden">
+            <div
+              class="address-message text-red-600"
+              th:errors="*{addressId}"
+            ></div>
+            <div class="flex items-center">
+              <div class="mr-2">丁目を選択</div>
+              <div class="mr-2 text-2xl" id="selected-choume-name"></div>
+            </div>
+            <div
+              class="choumeList mt-3 flex-col bg-blue-300 border-2 border-gray-700 max-h-60 overflow-auto"
+            >
+              <div
+                class="choume"
+                th:each="choume,status : ${choumeList}"
+                th:if="${choume.name != null}"
+              >
+                <input
+                  class="hidden"
+                  type="radio"
+                  name="addressId"
+                  th:id="'t' + ${choume.id}"
+                  th:value="${choume.id}"
+                  th:field="*{addressId}"
+                />
+                <label th:for="'t' + ${choume.id}">
+                  <div
+                    class="choume-selector pl-2 py-1 cursor-pointer bg-gray-200 hover:bg-gray-300"
+                    th:classappend="${!status.last ? 'border-b-2 border-gray-500' : ''}"
+                    th:text="${choume.name}"
+                  >
+                    丁目名
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ここまで市区町村選択 -->
+
+        <div class="flex justify-center mt-5">
+          <button
+            type="submit"
+            class="flex items-center bg-gray-500 rounded-md text-white p-2"
+          >
+            <span>検索</span><span class="material-icons"> search </span>
+          </button>
+        </div>
+      </form>
+    </main>
+    <!-- script -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script th:src="@{/js/searchByAddress.js}"></script>
+  </body>
+</html>
