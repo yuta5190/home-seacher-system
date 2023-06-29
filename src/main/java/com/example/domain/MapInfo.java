@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MapInfo {
+	private String Name;
 	private Double Longitude;
 	private Double Latitude;
 }
