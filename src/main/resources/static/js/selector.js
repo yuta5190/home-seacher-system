@@ -22,6 +22,7 @@ new Vue({
 
 
 //アドレス検索
+/*
 new Vue({
 	el: "#address-drop",
 	data: {
@@ -154,5 +155,6 @@ new Vue({
 		},
 		
 	}
-});
+})
+*/;
 //駅検索終了

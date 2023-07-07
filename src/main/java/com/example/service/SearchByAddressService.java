@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.domain.Address;
 import com.example.domain.Choume;
 import com.example.domain.Municipality;
 import com.example.domain.Town;
+import com.example.repository.AddressRepository;
 import com.example.repository.ChoumeRepository;
 import com.example.repository.MunicipalityRepository;
 import com.example.repository.TownRepository;
@@ -29,6 +31,8 @@ public class SearchByAddressService {
 	private TownRepository townRepository;
 	@Autowired
 	private ChoumeRepository choumeRepository;
+	@Autowired
+	private AddressRepository addressRepository;
 
 	/**
 	 * 都道府県IDから市区町村リストを取得.
@@ -59,5 +63,10 @@ public class SearchByAddressService {
 	public List<Choume> getChoumeListByTownId(int townId) {
 		return choumeRepository.getChoumeListByTownId(townId);
 	}
+	
+	public Address load(int id) {
+		return addressRepository.getAddressById(id).get(0);
+	}
+	
 
 }
