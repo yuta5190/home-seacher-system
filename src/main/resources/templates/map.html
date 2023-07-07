@@ -2,125 +2,65 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<title>家を建てる際の情報サイト</title>
-<!-- modelで名前(name)緯度(longitude),経度(latitude)を渡してください -->
+	<meta charset="UTF-8">
+	<title>家を建てる際の情報サイト</title>
+	<!-- modelで名前(name)緯度(longitude),経度(latitude)を渡してください -->
 </head>
+
 <body>
 	<header>
-		<div  id=pagetop>
-		<page-top></page-top>
+		<div id=pagetop>
+			<page-top-vue></page-top-vue>
 		</div>
-	<div id="pattern-search">	
-	
-	<div class=dropdown>
-		|
-	 <div id=distance-drop class="dropdown">
-      <button class="distance-button" v-on:click="toggleDropdown">{{selectDistance}}</button>
-      <ul class="dropdown-menu"  v-show="showDropdown">
-        <li v-for="option in options" :key="option" v-on:click="selectOption(option)">{{option.distance}}</li>
-      </ul>
-    </div>
-    |
-    <!-- 住所検索 -->
-    <!-- 緯度経度から近くの場所の地区を探すコントローラー(longitude,latitudeを引数に、地区名(name)と地区ID(id)の入ったaddressオブジェクトを返すpostメソッドの作成をお願いします -->
-    <!-- idを引数に、画面を表示させるgetメソッドをお願いします -->
-    <div id=address-drop class="dropdown">
-      <button class="address-button" v-on:click="toggleDropdown">{{selectAddress}}</button>
-      <ul class="dropdown-menu"  v-show="showDropdown">
-        <li v-for="address in addressList" :key="address" v-on:click="selectAddress(address)">{{ address.name }}</li>
-      </ul>
-    </div>
-     <!-- 住所検索終了 -->
-     |
-     <!-- 駅検索 -->
-    <!-- 緯度経度から近くの場所の地区を探すコントローラー(longitude,latitudeを引数に、地区名(name)と地区ID(id)の入ったaddressオブジェクトを返すpostメソッドの作成をお願いします -->
-    <!-- idを引数に、画面を表示させるgetメソッドをお願いします -->
-    <div id=station-drop class="dropdown">
-      <button class="station-button" v-on:click="toggleDropdown">{{selectStation}}</button>
-      <ul class="dropdown-menu"  v-show="showDropdown">
-        <li v-for="station in stationList" :key="station" v-on:click="selectStation(station)">{{ station.name }}</li>
-      </ul>
-    </div>
-     <!-- 駅検索終了 -->
-     |
-	</div>
-	</div>
-	<hr class="tophr">
-	<hr class="underhr">	
 	</header>
 	
-<main>
-<div id="map-style">
-<div id="map"></div>
-</div>
-<div id="option-style">
-  <div id="pin-search">
-    <h2>検索条件</h2>
-<div id="pin-check">
-    <input type="checkbox" id="institutions" name="selection" value="institutions" v-on:click="changeInstitution">
-    <label for="institutions">施設情報</label>
-    <input type="checkbox" id="price" name="selection" value="price" v-on:click="changePrice">
-    <label for="price">値段</label>
-    <input type="checkbox" id="crimes" name="selection" value="crimes" v-on:click="changeCrime">
-    <label for="crimes">犯罪情報</label>
-</div>
-</div>	
-<div class="tab_wrap">
-	<input id="tab1" type="radio" name="tab_btn" checked>
-	<input id="tab2" type="radio" name="tab_btn">
-	<input id="tab3" type="radio" name="tab_btn">
-
-	<div class="tab_area">
-		<label class="tab1_label" for="tab1">施設情報</label>
-		<label class="tab2_label" for="tab2">値段</label>
-		<label class="tab3_label" for="tab3">犯罪情報</label>
-	</div>
-	<div class="panel_area">
-		<div id="panel1" class="tab_panel">
-			<p>panel1</p>
-		</div>
-		<div id="panel2" class="tab_panel">
-			<p>panel2</p>
-		</div>
-		<div id="panel3" class="tab_panel">
-			<p>panel3</p>
-		</div>
-	</div>
-</div>
-</div>
-</main>
-
+	<hr class="tophr">
+	<hr class="underhr">
 	
-	<footer>ここに受け取ったidを受け取ります : <span th:text="${id}"></span>
-	<page-end id=pageend></page-end>
-<form>
-<input type="hidden" id="longitudeInput" th:value="${mapInfo.longitude}">
-<input type="hidden" id="latitudeInput" th:value="${mapInfo.latitude}">
-</form>
-</footer>
+	<main>
+		<div id="menu">
+			<tab-menu-vue></tab-menu-vue>
+		</div>
+
+		<div id="map-style">
+			<div id="map"></div>
+			<map-create-vue></map-create-vue>
+		</div>
+		
+		<div id="option-style">
+			<tag-create-vue></tag-create-vue>
+			<div class="tab_wrap">
+				<tab-view-vue @custom-event="handleCustomEvent"></tab-view-vue>
+			</div>
+		</div>
+	</main>
+
+	<footer>
+		<div id=pageend>
+			<page-end-vue></page-end-vue>
+		</div>
+		<form>
+			<input type="hidden" id="longitudeInput" th:value="${mapInfo.longitude}">
+			<input type="hidden" id="latitudeInput" th:value="${mapInfo.latitude}">
+		</form>
+	</footer>
 </body>
 
-<script
-	src="https://maps.google.com/maps/api/js?key=AIzaSyAG2tgnkXGl888HTaCPW8Bo9VPr8ytP8yc&language=ja"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuex@3"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyAG2tgnkXGl888HTaCPW8Bo9VPr8ytP8yc&language=ja"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.min.js"></script>
+<script src="https://unpkg.com/vuex@4"></script>
+<script src="/js/vuex/googlemapStore.js"></script>
+<script src="/js/vue/createMap.vue"></script>
+<script src="/js/vue/menuTab.vue"></script>
+<script src="/js/vue/createMapTag.vue"></script>
+<script src="/js/vue/template.vue"></script>
+<script src="/js/vue/viewInfomation.vue"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/js/googlemap.js"></script>
-<script src="/js/allpage.js"></script>
-
-<--!<script src="/js/selector.js"></script>-->
-
 
 <link rel="stylesheet" th:href="@{/css/map.css}" />
 <link rel="stylesheet" th:href="@{/css/animation.css}" />
-<link rel="stylesheet" th:href="@{/css/selector.css}" />
 <link rel="stylesheet" th:href="@{/css/tab.css}" />
-
-<input type="hidden" id="id" th:value="${id}"> 
-<input type="hidden" id="id" th:value="${id}"> 
-
-<!-- 以下コントローラーから情報を取得-->
-<!--  以上コントローラーから情報を取得-->
+<input type="hidden" id="id" th:value="${id}">
+<input type="hidden" id="id" th:value="${id}">
 
 </html>
