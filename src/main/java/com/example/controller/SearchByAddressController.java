@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.domain.Address;
 import com.example.domain.Choume;
+import com.example.domain.MapInfo;
 import com.example.domain.Municipality;
 import com.example.domain.Town;
 import com.example.form.SearchByAddressForm;
@@ -31,10 +33,11 @@ public class SearchByAddressController {
 
 	@Autowired
 	private SearchByAddressService service;
+	@Autowired
+	private SearchByAddressService searchByAddressService;
 
 	@GetMapping("")
 	public String showPage(Model model, SearchByAddressForm form) {
-		System.out.println(form);
 
 		List<Municipality> municipalitylist = service.getMunicipalityListByPrefectureId(TOKYO_ID);
 		model.addAttribute("municipalityList", municipalitylist);
@@ -52,15 +55,27 @@ public class SearchByAddressController {
 
 	}
 
+	/**
+	 * 選んだ住所情報で検索し、地図を表示させるメソッド
+	 * 
+	 * @param model　モデル
+	 * @param form　住所情報
+	 * @param br　
+	 * @return　地図表示画面
+	 */
 	@PostMapping("search")
 	public String search(Model model, @Validated SearchByAddressForm form, BindingResult br) {
-
 		if (br.hasErrors()) {
 			return showPage(model, form);
 		}
-
-		
-		return "redirect:/map/?id=" + form.getAddressId() + "&infomationType=address";
+		MapInfo mapInfo = new MapInfo();
+		Address address = searchByAddressService.load(form.getAddressId());
+		mapInfo.setLatitude(address.getLatitude());
+		mapInfo.setLongitude(address.getLongitude());
+		model.addAttribute("id", form.getAddressId());
+		model.addAttribute("infomationType", "address");
+		model.addAttribute("mapInfo", mapInfo);
+		return "map";
 	}
 
 }

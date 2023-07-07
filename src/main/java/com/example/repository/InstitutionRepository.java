@@ -9,32 +9,50 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import com.example.domain.MapInfo;
+import com.example.domain.PinInfo;
 
+/**
+ * 建物情報のリポジトリ. yoshida_yuuta
+ */
 @Repository
 public class InstitutionRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-	
-	private static final RowMapper<MapInfo> INSTITUTION_ROW_MAPPER = (rs, i) -> {
-		MapInfo mapInfo = new MapInfo();
-		mapInfo.setName(rs.getString("name")); 
-		//バグの為逆にしてる
-		mapInfo.setLatitude(rs.getDouble("longitude")); 
-		mapInfo.setLongitude(rs.getDouble("latitude")); 
-		
-		return mapInfo;
+
+	/**
+	 * 建物情報のローマッパー
+	 */
+	private static final RowMapper<PinInfo> INSTITUTION_ROW_MAPPER = (rs, i) -> {
+		PinInfo pinInfo = new PinInfo();
+		pinInfo.setName(rs.getString("name"));
+		// バグの為逆にしてる
+		pinInfo.setLatitude(rs.getDouble("latitude"));
+		pinInfo.setLongitude(rs.getDouble("longitude"));
+		pinInfo.setDetail(rs.getString("available_days"));
+		return pinInfo;
 	};
-	public List<MapInfo> selectMapInfo(double longitude,double latitude) {
-		//名前逆
-		Double latmax=longitude+0.045;
-		Double latmin=longitude-0.045;
-		Double longmax=latitude+0.045;
-		Double longmin=latitude-0.045;
-		SqlParameterSource param = new MapSqlParameterSource().addValue("longmax", longmax).addValue("longmin", longmin).addValue("latmax", latmax).addValue("latmin", latmin);
-		String sql = "SELECT name,longitude, latitude FROM institutions  WHERE longitude BETWEEN :longmin AND :longmax AND latitude BETWEEN :latmin AND :latmax";
-		List<MapInfo> institutionList = template.query(sql, param, INSTITUTION_ROW_MAPPER);
+
+	/**
+	 * 緯度経度と倍率から範囲内の建物を検索するメソッド
+	 * 
+	 * @param longitude 経度
+	 * @param latitude  緯度
+	 * @param ratio     範囲(km)
+	 * @return 建物情報のリスト
+	 */
+	public List<PinInfo> selectMapInfo(double longitude, double latitude, int ratio) {
+		
+		//0.015が大体1km
+		Double numWidth = 0.015 * ratio;
+		Double longmax = longitude + numWidth;
+		Double longmin = longitude - numWidth;
+		Double latmax = latitude + numWidth;
+		Double latmin = latitude - numWidth;
+		SqlParameterSource param = new MapSqlParameterSource().addValue("longmax", longmax).addValue("longmin", longmin)
+				.addValue("latmax", latmax).addValue("latmin", latmin);
+		String sql = "SELECT name,longitude, latitude,available_days FROM institutions  WHERE longitude BETWEEN :longmin AND :longmax AND latitude BETWEEN :latmin AND :latmax";
+		List<PinInfo> institutionList = template.query(sql, param, INSTITUTION_ROW_MAPPER);
 		return institutionList;
 	}
 }
