@@ -41,6 +41,7 @@ public class AddressRepository {
 	 * @param id 住所id
 	 * @return 住所情報
 	 */
+
 	public List<Address> getAddressById(int id) {
 		String sql = "SELECT id,name,latitude,longitude FROM addresses WHERE prefecture_id=13  AND id = :id ";
 		List<Address> AddressList = template.query(sql, new MapSqlParameterSource("id", id),
@@ -49,12 +50,35 @@ public class AddressRepository {
 	}
 
 	/**
-	 * 緯度経度から近隣の５つの住所を取得するメソッド（表示の関係で５つ）
+	 * 緯度と経度の情報から住所情報を取り出すメソッド.
 	 * 
 	 * @param longitude 経度
 	 * @param latitude  緯度
+	 * @return 住所情報のリスト
+	 */
+	public List<Address> getAddressByLongitudeAndLatitude(double longitude, double latitude) {
+		// 名前逆
+		Double latmax = longitude + 0.045;
+		Double latmin = longitude - 0.045;
+		Double longmax = latitude + 0.045;
+		Double longmin = latitude - 0.045;
+
+		SqlParameterSource param = new MapSqlParameterSource().addValue("longmax", longmax).addValue("longmin", longmin)
+				.addValue("latmax", latmax).addValue("latmin", latmin);
+		String sql = "SELECT id, name, name_kana, name_rome, latitude, longitude, prefecture_id, municipality_id FROM addresses WHERE longitude BETWEEN :longmin AND :longmax AND latitude BETWEEN :latmin AND :latmax ;";
+		List<Address> addressList = template.query(sql, param, new BeanPropertyRowMapper<Address>(Address.class));
+		return addressList;
+	}
+	/*
+	 * 緯度経度から近隣の５つの住所を取得するメソッド（表示の関係で５つ）
+	 * 
+	 * @param longitude 経度
+	 * 
+	 * @param latitude 緯度
+	 * 
 	 * @return 近隣住所情報
 	 */
+
 	public List<TabItem> getAddressByLonLat(double longitude, double latitude) {
 		SqlParameterSource param = new MapSqlParameterSource().addValue("targetLongitude", longitude)
 				.addValue("targetLatitude", latitude);
