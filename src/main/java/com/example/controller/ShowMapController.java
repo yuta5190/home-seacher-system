@@ -50,6 +50,7 @@ public class ShowMapController {
 			mapInfo.setLatitude(station.getLatitude());
 			mapInfo.setLongitude(station.getLongitude());
 		}
+
 		model.addAttribute("id", id);
 		model.addAttribute("infomationType", infomationType);
 		model.addAttribute("mapInfo", mapInfo);
