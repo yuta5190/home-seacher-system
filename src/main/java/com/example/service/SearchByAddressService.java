@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.domain.Address;
 import com.example.domain.Choume;
 import com.example.domain.Municipality;
+import com.example.domain.PinInfo;
+import com.example.domain.TabItem;
 import com.example.domain.Town;
 import com.example.repository.AddressRepository;
 import com.example.repository.ChoumeRepository;
@@ -68,5 +70,14 @@ public class SearchByAddressService {
 		return addressRepository.getAddressById(id).get(0);
 	}
 	
-
+	/**
+	 * 緯度経度から誓いAddressを５件取得
+	 * @param longitude　経度
+	 * @param latitude　緯度
+	 * @return　Address５件
+	 */
+	public List<TabItem> getAddressByLonLat(double longitude,double latitude){
+		List<TabItem> addressOtions=addressRepository.getAddressByLonLat(longitude, latitude);
+		return addressOtions;
+	}
 }

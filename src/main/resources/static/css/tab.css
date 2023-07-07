@@ -36,19 +36,51 @@ input[type="radio"] {
 
 .panel_area {
 	background: #fff;
-	    height: 85%
+	    height: 85%;
+	    width: 100%;
+	    overflow-y: auto;
+}
+.panel_area::-webkit-scrollbar {
+  display: none; /* Chrome/Safari用 */
 }
 
 .tab_panel {
 	width: 100%;
-	padding: 80px 0;
+	padding: 15px 0;
 	display: none;
+	
 }
 
-.tab_panel p {
-	font-size: 14px;
+
+.tab_panel table {
+	width:100%;
+	height:100%;
+	text-align: center;
+	
+}
+
+.tab_panel tr {
+	font-size:24px;
+	width: 95%;
+	height: 25px;
+	border: 2px solid black;
+	margin-top: 4%;
+}
+
+.tab_panel th {
+	font-size:24px;
+	width: 50%;
+	height: 25px;
+	margin: 0 2.5% 0 2.5%;
+}
+
+.tab_panel td {
+	width: 50%;
+	height: 25px;
+	font-size: 24px;
 	letter-spacing: 1px;
 	text-align: center;
+	
 }
 
 #tab1:checked ~ .tab_area .tab1_label {
