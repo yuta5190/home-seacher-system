@@ -2,8 +2,6 @@
 //store.stateのついているものはvuexの要素
 
 const setMap = Vue.createApp({}); 
-
-
 setMap.component('map-create-vue', { 
 //map-create-vueに表示した段階で実行するもの
    mounted() { 

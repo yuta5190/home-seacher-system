@@ -9,7 +9,7 @@ tabMenuCreate.component('tab-menu-vue', {
 		distanceValue: "",
 		showAddressDropdown: false,
 		showStationDropdown: false,
-		distanceOptions: [{distance:'1km',value:"1"}, {distance:'3km',value:"3"}, {distance:'5km',value:"5"}],
+		distanceOptions: [{distance:'500m',value:"0.5"}, {distance:'1km',value:"1"}, {distance:'3km',value:"3"}],
 		addressOptions: [],
 		stationOptions: [],
 		option: '',
@@ -34,14 +34,14 @@ methods: {
   //距離のボタンに応じて地図の倍率を変える
   　emitInitializeMap(distance) {
    　　　this.fetchData(distance)
-    　　　　if(distance==="1"){
-    　　　　　　store.state.map.setZoom(14.5)
+    　　　　if(distance==="0.5"){
+    　　　　　　store.state.map.setZoom(15.5)
     　　 　　};
-　　　　  　　if(distance==="3"){
-  　　　　　　　　　　 store.state.map.setZoom(13.5) 
+　　　　  　　if(distance==="1"){
+  　　　　　　　　　　 store.state.map.setZoom(14.5) 
   　　　　　　};
-  　　　　　　if(distance==="5"){
-   　　　　　　　　store.state.map.setZoom(12.5) 
+  　　　　　　if(distance==="3"){
+   　　　　　　　　store.state.map.setZoom(13.5) 
   　　　　　　};
 　　　},
   //施設情報の取得
@@ -73,17 +73,10 @@ methods: {
 			this.selectDistance = options.distance + "▼";
 			this.emitInitializeMap(options.value);
 	}},
-　　template: `
-
-<div id="distance-drop">
-　　<button class="select-button" v-on:click="changeDistanceDropdown">{{selectDistance}}</button>
+　　template: `<div id="distance-drop"><button class="select-button" v-on:click="changeDistanceDropdown">{{selectDistance}}</button>
 　　<transition name="tabslide">
-　　　　<ul class="dropdown-menu" v-show="showDistanceDropdown">
-      <li v-for="distance in distanceOptions" :key="distance" v-on:click="selectDistanceOption(distance)" class="options">{{distance.distance}}</li>
-    </ul>
-  </transition>
-</div>
-
+　　　　<ul class="dropdown-menu" v-show="showDistanceDropdown"><li v-for="distance in distanceOptions" :key="distance" v-on:click="selectDistanceOption(distance)" class="options">{{distance.distance}}</li></ul>
+  </transition></div>
     <div id="address-drop" >
       <button class="select-button" v-on:click="changeAddressDropdown">{{selectAddress}}</button>
       <transition name="tabslide5">
