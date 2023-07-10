@@ -12,7 +12,7 @@ import com.example.domain.Station;
 import com.example.service.StationService;
 
 /**
- * map表示がめん.
+ * map表示画面.
  * 
  * @author yoshida_yuuta
  */
