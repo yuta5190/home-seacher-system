@@ -47,6 +47,27 @@ public class AddressRepository {
 				new BeanPropertyRowMapper<Address>(Address.class));
 		return AddressList;
 	}
+	/**
+	 * 緯度と経度の情報から住所情報を取り出すメソッド.
+	 * 
+	 * @param longitude 経度
+	 * @param latitude  緯度
+	 * @return 住所情報のリスト
+	 */
+	public List<Address> getAddressByLongitudeAndLatitude(double longitude, double latitude) {
+		// 名前逆
+		Double latmax = longitude + 0.045;
+		Double latmin = longitude - 0.045;
+		Double longmax = latitude + 0.045;
+		Double longmin = latitude - 0.045;
+
+		SqlParameterSource param = new MapSqlParameterSource().addValue("longmax", longmax).addValue("longmin", longmin)
+				.addValue("latmax", latmax).addValue("latmin", latmin);
+		String sql = "SELECT id, name, name_kana, name_rome, latitude, longitude, prefecture_id, municipality_id FROM addresses WHERE longitude BETWEEN :longmin AND :longmax AND latitude BETWEEN :latmin AND :latmax ;";
+		List<Address> addressList = template.query(sql, param, new BeanPropertyRowMapper<Address>(Address.class));
+		return addressList;
+	}
+	
 
 	/**
 	 * 緯度経度から近隣の５つの住所を取得するメソッド（表示の関係で５つ）
