@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /* Reset styles */
-
+/*
+<<<<<<< HEAD
 /*ページ整備*/
 /*属性*/
 h1, h2, h3, p, ul, li {
@@ -96,20 +97,27 @@ hr.under-hr {
 
 
 /*body部分*/
+/*=======
+html {
+	height: 100%;
+	width:100%;
+}
+>>>>>>> 411fd883cf2066990570791577a9b6ba464b909e
 body {
 	width:100%;
 	height:80%;
 	margin: 0;
 	padding: 0;
-	margin-top: 0;
 	background-color: #dddce3;
 	height: 100%;
+	width:100%;
 	font-family:Arial, sans-serif;
 	max-width: 100%;
 	 overflow-x: hidden; 
 	  padding-bottom: 0;
 }
 
+<<<<<<< HEAD
 
 /*mapのピンをさす所まで含め全て*/
 #map-style {
@@ -188,19 +196,279 @@ a {
 }
 
 footer {
+/*=======
+header {
+	width:100%;
+	height: 10%;
+>>>>>>> 411fd883cf2066990570791577a9b6ba464b909e
 	background-color: #333;
+	padding: 0;
+	margin:0;
 	color: #fff;
+<<<<<<< HEAD
 	padding: 20px;
 	margin-top: 0;
+=======
+	
+}
+#pagetop{
+	width:100%;
+	height: 100%;
+}
+
+.text-flex{
+	width:100%;
+	height: 100%;
+	display: flex;
+}
+.tabslide-enter-active{
+
+	transition: transform 300ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+.tabslide-enter-from {
+	transform: translateY(-20%);
+}
+
+.tabslide5-enter-to {
+	transform: translateY(0);
+}
+
+.tabslide5-enter-active{
+
+	transition: transform 300ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+.tabslide5-enter-from {
+	transform: translateY(-20%);
+}
+
+.tabslide5-enter-to {
+	transform: translateY(0);
+}
+
+
+.title{
+	width:50%;
+	height:100%;
+	flex:1;
+>>>>>>> 411fd883cf2066990570791577a9b6ba464b909e
 	text-align: center;
 }
 
-footer p {
-	margin-top: 10px;
+.title h1{
+	font-size:30px;
+	margin:3% 5% 0 3%;
+	padding:0;
+	color: #fff;
+}
+.header-right {
+	width:50%;
+	height:100%;
+	flex:2;
+	padding-top: 1%;
+  text-align: right;
+  vertical-align: top;
+  }
+  
+.header-right a {
+	text-decoration: none;
+	color: white;
+	margin-right: 10px;
+	margin-top:0;
 }
 
+<<<<<<< HEAD
 /*ページ整備*/
 
 
+/*=======
+
+/*hrの整備*/
+/*hr.tophr {
+	margin-top: 0;
+	margin-bottom: 0;
+	color: white;
+	border-width: 1px;
+	border-style: solid;
+}
+
+hr.underhr {
+	margin-top: 0;
+	margin-bottom: 0px;
+	border-width: 2px;
+	color: black;
+}
+/*hrの整備*/
+
+/*
+main{
+	padding: 0;
+	margin:0;
+	width:100%;
+	height: 100%;
+	display: flex;
+}
+
+#menu {
+  flex: 0 0 280px;
+  height: 100%;
+  background-image: url("/img/tab-image.jpg");
+  border-right: 4px solid gray;
+  border-bottom: 1px solid gray;
+  font-size: 30px;
+  overflow-y: auto;
+}
+
+#menu::-webkit-scrollbar {
+  display: none; /* Chrome/Safari用 */
+}
+
+#distance-drop {
+  width: 100%;
+  height: auto;
+  color: black;
+}
+#address-drop {
+  width: 100%;
+   height: auto;
+  color: black;
+}
 
 
+#station-drop {
+  width: 100%;
+  height: auto;
+  color: black;
+}
+
+.select-button {
+  width: 100%;
+  height: 65px;
+  background-color: transparent;
+  border-top: transparent;
+  border-color: peru;
+  border-width: 2px;
+  font-size: 26px;
+  color: black;
+  font-weight: 900;
+  letter-spacing: 4px;
+}
+
+.dropdown-menu {
+  width: 100%;
+  height: auto;
+  font-size: 26px;
+  color: black;
+  font-weight: 900;
+  letter-spacing: 4px;
+}
+
+.options {
+  width: 100%;
+  height: 63px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   border: 1px solid black;
+   background-color: rgba(107, 73, 61, 0.5);
+}
+
+/*mapの整備*/
+
+/*mapのピンをさす所まで含め全て*/
+#map-style {
+	height: 900px;
+	width:900px;
+	 flex: 0 0 900px;
+	 margin:0 1% 1% 1%;
+}
+
+/*mapのピンをさす所まで含め全て*/
+#map {
+  margin: 1.5%;
+  height: 100%;
+  width: 100%;
+}
+/*mapの整備*/
+/*>>>>>>> 411fd883cf2066990570791577a9b6ba464b909e
+
+#option-style {
+	flex:1;
+	height: 100%;
+	width:30%;
+	display: flex;
+    flex-direction: column;
+  align-items: center;
+}
+
+#pin-search {
+	width:95%;
+	height:40%;
+  float: left;
+ margin: 2% 2% 2% 0 ;
+  background-color: darkgray;
+      flex-direction: column;
+  align-items: center;
+}
+
+#pin-search h2 {
+ margin: 2% ;
+  font-size:30px;
+}
+
+#pin-check{
+	width:100%;
+	height:75%;
+	text-align: center;
+	margin-top:-2%;
+}
+
+
+footer {
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	padding: 0;
+	margin:0;
+	width:100%;
+	height: 10%;
+}
+
+/*ページ整備*/
+ h2, h3, p, ul, li {
+	margin: 0;
+	padding: 0;
+}
+
+nav {
+	margin-bottom: 10px;
+}
+
+nav a {
+	color: #fff;
+	margin-right: 10px;
+	text-decoration: none;
+}
+
+/*上部の黒い箇所のcss*/
+
+section {
+	padding: 20px;
+}
+
+
+h3 {
+	font-size: 18px;
+	margin-bottom: 5px;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+}
+
+p {
+	margin-bottom: 5px;
+}
+
+/*ページ整備*/

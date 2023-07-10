@@ -3,6 +3,8 @@
 	xmlns:v-bind="http://vuejs.org" xmlns:v-on="http://vuejs.org">
 
 <head>
+	<!--
+<<<<<<< HEAD
 <meta charset="UTF-8">
 <title>家を建てる際の情報サイト</title>
 <!-- modelで名前(name)緯度(longitude),経度(latitude)を渡してください -->
@@ -151,4 +153,67 @@
 <input type="hidden" id="longitudeInput" th:value="${mapInfo.longitude}">
 <input type="hidden" id="latitudeInput" th:value="${mapInfo.latitude}"> 
 <!--  以上コントローラーから情報を取得-->
+=======-->
+	<meta charset="UTF-8">
+	<title>家を建てる際の情報サイト</title>
+	<!-- modelで名前(name)緯度(longitude),経度(latitude)を渡してください -->
+</head>
+
+<body>
+	<header>
+		<div id=pagetop>
+			<page-top-vue></page-top-vue>
+		</div>
+	</header>
+	
+	<hr class="tophr">
+	<hr class="underhr">
+	
+	<main>
+		<div id="menu">
+			<tab-menu-vue></tab-menu-vue>
+		</div>
+
+		<div id="map-style">
+			<div id="map"></div>
+			<map-create-vue></map-create-vue>
+		</div>
+		
+		<div id="option-style">
+			<tag-create-vue></tag-create-vue>
+			<div class="tab_wrap">
+				<tab-view-vue @custom-event="handleCustomEvent"></tab-view-vue>
+			</div>
+		</div>
+	</main>
+
+	<footer>
+		<div id=pageend>
+			<page-end-vue></page-end-vue>
+		</div>
+		<form>
+			<input type="hidden" id="longitudeInput" th:value="${mapInfo.longitude}">
+			<input type="hidden" id="latitudeInput" th:value="${mapInfo.latitude}">
+		</form>
+	</footer>
+</body>
+
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyAG2tgnkXGl888HTaCPW8Bo9VPr8ytP8yc&language=ja"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.min.js"></script>
+<script src="https://unpkg.com/vuex@4"></script>
+<script src="/js/vuex/googlemapStore.js"></script>
+<script src="/js/vue/createMap.vue"></script>
+<script src="/js/vue/menuTab.vue"></script>
+<script src="/js/vue/createMapTag.vue"></script>
+<script src="/js/vue/template.vue"></script>
+<script src="/js/vue/viewInfomation.vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<link rel="stylesheet" th:href="@{/css/map.css}" />
+<link rel="stylesheet" th:href="@{/css/animation.css}" />
+<link rel="stylesheet" th:href="@{/css/tab.css}" />
+<input type="hidden" id="id" th:value="${id}">
+<input type="hidden" id="id" th:value="${id}">
+
+>>>>>>> 411fd883cf2066990570791577a9b6ba464b909e
 </html>

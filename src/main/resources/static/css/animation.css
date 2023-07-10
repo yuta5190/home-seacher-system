@@ -1,4 +1,4 @@
-@charset "UTF-8";
+/*@charset "UTF-8";
 
 .v--enter-active,
 .v-leave-active {
@@ -30,8 +30,13 @@ font-size:25px;
 #pin-search label {
   display: block;
   position: relative;
+<<<<<<< HEAD
   margin: 5% 0 5% 25%;
   padding: 15px 30px 15px 62px;
+=======
+  margin: 1% auto 1% auto;
+  padding: 20px 70px 20px 65px;
+>>>>>>> 411fd883cf2066990570791577a9b6ba464b909e
   border: 3px solid #6a8494;
   border-radius: 100px;
   color: #6a8494;
@@ -42,7 +47,6 @@ font-size:25px;
   user-select: none;
   transition: background-color .2s, box-shadow .2s;
   width: 300px;
-  transform: translateX(100px);
 }
 
 /* 円 */

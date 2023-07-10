@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.Station;
+import com.example.domain.TabItem;
 import com.example.repository.StationRepository;
 
 /**
@@ -50,5 +51,17 @@ public class StationService {
 	public Station load(Integer stationId) {
 		Station station = stationRepoitory.load(stationId);
 		return station;
+	}
+
+	/**
+	 * 緯度経度より近隣駅情報を取得.
+	 * 
+	 * @param longitude 経度
+	 * @param latitude  緯度
+	 * @return 駅情報
+	 */
+	public List<TabItem> getStationByLonLat(double longitude, double latitude) {
+		List<TabItem> stationOptions = stationRepoitory.getStationByLonLat(longitude, latitude);
+		return stationOptions;
 	}
 }

@@ -10,7 +10,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import com.example.domain.Address;
 import com.example.domain.Station;
+import com.example.domain.TabItem;
 
 /**
  * stationsテーブルを操作するリポジトリ.
@@ -28,6 +30,16 @@ public class StationRepository {
 	 * Stationオブジェクトを生成するローマッパー.
 	 */
 	private static final RowMapper<Station> STATION_ROW_MAPPER = new BeanPropertyRowMapper<>(Station.class);
+
+	/**
+	 * TabItemオブジェクトを生成するローマッパー
+	 */
+	private static final RowMapper<TabItem> TabItem_ROW_MAPPER = (rs, i) -> {
+		TabItem tabItem = new TabItem();
+		tabItem.setName(rs.getString("station_name"));
+		tabItem.setId(rs.getInt("id"));
+		return tabItem;
+	};
 
 	/**
 	 * stationsテーブルを全県検索する.
@@ -89,4 +101,20 @@ public class StationRepository {
 		}
 		return getStation.get(0);
 	}
+
+	/**
+	 * 緯度経度から近隣の駅情報を５件取得するメソッド
+	 * 
+	 * @param longitude 経度
+	 * @param latitude  緯度
+	 * @return 駅情報
+	 */
+	public List<TabItem> getStationByLonLat(double longitude, double latitude) {
+		SqlParameterSource param = new MapSqlParameterSource().addValue("targetLongitude", longitude)
+				.addValue("targetLatitude", latitude);
+		String sql = "SELECT id, station_name FROM stations WHERE longitude != :targetLongitude AND latitude != :targetLatitude ORDER BY POWER((longitude - :targetLongitude), 2) + POWER((latitude - :targetLatitude), 2) LIMIT 5;";
+		List<TabItem> stationOptions = template.query(sql, param, TabItem_ROW_MAPPER);
+		return stationOptions;
+	}
+
 }
