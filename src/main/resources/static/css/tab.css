@@ -8,7 +8,7 @@
   margin: 0;
 }
 
-input[type="radio"] {
+#option-style input[type="radio"] {
 	display: none;
 }
 

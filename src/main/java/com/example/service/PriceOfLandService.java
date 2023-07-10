@@ -35,6 +35,7 @@ public class PriceOfLandService {
 	 * @return 地価リスト
 	 */
 	public List<PriceOfLand> selectPriceOfRepositoryByMapInfo(MapInfo mapInfo) {
+		//視野倍率が必要になるので変更するかもです
 		List<Address> addressList = addressRepository.getAddressByLongitudeAndLatitude(mapInfo.getLongitude(),
 				mapInfo.getLatitude());
 

@@ -26,7 +26,7 @@ public class InstitutionService {
 	 * @param ratio　範囲(km)
 	 * @return  住所情報
 	 */
-	public List<PinInfo> selectMapInfo(double longitude,double latitude,int ratio){
+	public List<PinInfo> selectMapInfo(double longitude,double latitude,double ratio){
 		List<PinInfo> institutionList=institutionRepository.selectMapInfo(longitude, latitude,ratio);
 		return institutionList;
 	}

@@ -21,15 +21,15 @@ createTag.component('tag-create-vue', {
 mounted() { 
 setTimeout(() => {
 //初期倍率は3km
-let ratio =3;
-this.fetchData(ratio);
+store.state.ratio =3;
+this.fetchData();
 		},100);
 }, 
 
 methods: { 
 //位置と倍率から情報を取得
- fetchData(ratio) {
-    axios.post('/map/getdata', { longitude: store.state.longitude, latitude: store.state.latitude, ratio: ratio })
+ fetchData() {
+    axios.post('/map/getdata', { longitude: store.state.longitude, latitude: store.state.latitude, ratio: store.state.ratio })
       .then(response => {
         var data = response.data;
         store.state.institutionList = data.institutionList;
