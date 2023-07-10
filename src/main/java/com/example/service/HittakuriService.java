@@ -7,40 +7,38 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.Address;
+import com.example.domain.Hittakuri;
 import com.example.domain.MapInfo;
-import com.example.domain.PriceOfLand;
 import com.example.repository.AddressRepository;
-import com.example.repository.PriceOfLandRepository;
+import com.example.repository.HittakuriRepository;
 
 /**
- * 地価情報の業務処理を行うサービスクラス.
+ * ひったくり情報の業務処理を行うサービスクラス.
  * 
  * @author yoshimatsushouta
  *
  */
 @Service
 @Transactional
-public class PriceOfLandService {
+public class HittakuriService {
+	@Autowired
+	private AddressRepository addressRepository;
 
 	@Autowired
-	public AddressRepository addressRepository;
-
-	@Autowired
-	public PriceOfLandRepository priceOfLandRepository;
+	public HittakuriRepository hittakuriRepository;
 
 	/**
-	 * 経度と緯度から地価情報のリストを返すメソッド.
+	 * 経度と緯度からひったくり情報のリストを返すメソッド.
 	 * 
 	 * @param mapInfo 経度と緯度の情報
-	 * @return 地価リスト
+	 * @return ひったくり情報リスト
 	 */
-	public List<PriceOfLand> selectPriceOfRepositoryByMapInfo(MapInfo mapInfo) {
+	public List<Hittakuri> selectHittakuriOfRepositoryByMapInfo(MapInfo mapInfo) {
 		List<Address> addressList = addressRepository.getAddressByLongitudeAndLatitude(mapInfo.getLongitude(),
 				mapInfo.getLatitude());
 
-		List<PriceOfLand> priceOfLandList = priceOfLandRepository.getPriceOfLandListByAddressId(addressList);
-
-		return priceOfLandList;
+		List<Hittakuri> hittakuriList = hittakuriRepository.getHittakuriByAddressId(addressList);
+		return hittakuriList;
 	}
 
 }

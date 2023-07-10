@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.domain.Address;
+import com.example.domain.Hittakuri;
 import com.example.domain.MapInfo;
 import com.example.domain.PinInfo;
 import com.example.domain.PriceOfLand;
 import com.example.domain.Station;
 import com.example.domain.TabItem;
+import com.example.service.HittakuriService;
 import com.example.service.InstitutionService;
 import com.example.service.PriceOfLandService;
 import com.example.service.SearchByAddressService;
@@ -40,6 +42,8 @@ public class ShowMapController {
 	private InstitutionService institutionService;
 	@Autowired
 	private PriceOfLandService priceOfLandService;
+	@Autowired
+	private HittakuriService hittakuriService;
 
 	/**
 	 * 仮画面表示(get時)
@@ -89,12 +93,17 @@ public class ShowMapController {
 //			mapInfo.setLatitude(address.getLatitude());
 //			mapInfo.setLongitude(address.getLongitude());
 //		}
-		List<PriceOfLand> priceOfLandList = priceOfLandService.selectPriceOfRepositoryByMapInfo(mapInfo);
 
 		model.addAttribute("id", id);
 		model.addAttribute("infomationType", infomationType);
 		model.addAttribute("mapInfo", mapInfo);
+
+		// 表示する地域の座標を元に地価情報を送る
+		List<PriceOfLand> priceOfLandList = priceOfLandService.selectPriceOfRepositoryByMapInfo(mapInfo);
 		model.addAttribute("priceOfLandList", priceOfLandList);
+		// 表示する地域の座標を元にひったくり情報を送る
+		List<Hittakuri> hittakuriList = hittakuriService.selectHittakuriOfRepositoryByMapInfo(mapInfo);
+		model.addAttribute("hittakuriList", hittakuriList);
 		return "map";
 	}
 
