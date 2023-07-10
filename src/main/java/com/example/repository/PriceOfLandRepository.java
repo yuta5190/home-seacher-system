@@ -31,10 +31,9 @@ public class PriceOfLandRepository {
 	 * @return 地価情報のリスト
 	 */
 	@SuppressWarnings("null")
-	public List<PriceOfLand> getPriceOfLandListByaddressId(List<Address> addressList) {
+	public List<PriceOfLand> getPriceOfLandListByAddressId(List<Address> addressList) {
 		List<PriceOfLand> priceOfLandList = null;
 		for (Address address : addressList) {
-
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT ");
 			sql.append(
