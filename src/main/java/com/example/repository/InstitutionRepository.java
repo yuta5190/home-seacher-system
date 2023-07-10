@@ -41,7 +41,7 @@ public class InstitutionRepository {
 	 * @param ratio     範囲(km)
 	 * @return 建物情報のリスト
 	 */
-	public List<PinInfo> selectMapInfo(double longitude, double latitude, int ratio) {
+	public List<PinInfo> selectMapInfo(double longitude, double latitude, double ratio) {
 		
 		//0.015が大体1km
 		Double numWidth = 0.015 * ratio;

@@ -66,7 +66,7 @@ public class ShowMapController {
 	public Map<String,List<PinInfo>> getData(@RequestBody Map<String, String> requestData) {
 	    Double longitude = Double.parseDouble(requestData.get("longitude"));
 	    Double latitude = Double.parseDouble(requestData.get("latitude"));
-	    int ratio = Integer.parseInt(requestData.get("ratio"));
+	    double ratio = Double.parseDouble(requestData.get("ratio"));
 	    //３種のオブジェクトで行おうと思いましたが、returnできるMapのvaluが一種類であり、３回通信が必要となるため、PinInfoに合わせて送ってます。増やしたい情報有れば、domainに追加して問題ないです、
 		List<PinInfo> institutionInfo = institutionService.selectMapInfo(longitude, latitude,ratio);
 		//上と同じようにListをつくり、mapに詰めればhtmlで使用可能

@@ -23,9 +23,10 @@ setMap.component('map-create-vue', {
        
        //中心の位置
        const position = { lat: latitude, lng:longitude }; 
+       store.state.centerPosition = new google.maps.LatLng(store.state.latitude,  store.state.longitude)
       //地図のオプション 
        store.state.option= { 
-          zoom: 13, 
+          zoom:  14,
           center: position, 
           mapTypeId: 'roadmap',
        }; 
@@ -35,18 +36,17 @@ setMap.component('map-create-vue', {
 	   
 	   //中心の位置にヒト型マーカーを設定
 	   store.state.currentLocationMarker= new google.maps.Marker({
-				position: new google.maps.LatLng(store.state.latitude,  store.state.longitude),
+				position: store.state.centerPosition,
 				icon:{url:'/img/currentLocation.png',scaledSize : new google.maps.Size(110, 110)}
 			});
 	  
 	  //作成した地図をset
 	   store.state.currentLocationMarker.setMap(store.state.map);
        },
+       
    },
    template: `
    <div class="map"></div>`,
     }); 
 
 setMap.mount('#map-style');
-
-
